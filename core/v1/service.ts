@@ -2,6 +2,7 @@ import { IPageView } from 'core/v1/types/i-page-view'
 import { ISessionDuration } from 'core/v1/types/i-session-duration'
 import { IEvent } from 'core/v1/types/i-event'
 import { ICustomEvent } from 'core/v1/types/i-custom-event'
+import Fetcher from 'core/utils/fetcher'
 
 export interface ServiceInput {
     apiToken: string
@@ -9,13 +10,19 @@ export interface ServiceInput {
 }
 
 export class Service {
-    private readonly apiToken: string
-    private readonly apiUrl: string
+    private readonly fetcher: Fetcher
 
     protected constructor(options: ServiceInput) {
         const { apiToken, apiUrl } = options
-        this.apiToken = apiToken
-        this.apiUrl = apiUrl
+        this.fetcher = new Fetcher({
+            onPreRequest: (options) => {
+                options!.headers = {
+                    Authorization: apiToken,
+                }
+                return options
+            },
+            baseUrl: apiUrl,
+        })
     }
 
     public static create(options: ServiceInput): Service {
@@ -23,20 +30,20 @@ export class Service {
     }
 
     async trackPageView(pageView: IPageView): Promise<void> {
-        throw new Error(`Not implemented, ${pageView}`)
+        await this.fetcher.post(`api/v1/page-view`, pageView)
     }
 
     async trackSessionDuration(
         sessionDuration: ISessionDuration
     ): Promise<void> {
-        throw new Error(`Not implemented, ${sessionDuration}`)
+        await this.fetcher.post(`api/v1/session-duration`, sessionDuration)
     }
 
     async trackEvent(event: IEvent): Promise<void> {
-        throw new Error(`Not implemented, ${event}`)
+        await this.fetcher.post(`api/v1/event`, event)
     }
 
     async trackCustomEvent(customEvent: ICustomEvent): Promise<void> {
-        throw new Error(`Not implemented, ${customEvent}`)
+        await this.fetcher.post(`api/v1/custom-event`, customEvent)
     }
 }

@@ -1,5 +1,6 @@
 import * as V1 from 'core/v1'
-import { isEmpty, isNil } from 'lodash'
+import isEmpty from 'lodash/isEmpty'
+import isNil from 'lodash/isNil'
 import { NotInitializedException } from 'core/exceptions/not-initialized-exception'
 
 let service: V1.Service

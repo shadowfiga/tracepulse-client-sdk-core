@@ -5,6 +5,7 @@
     "license": "MIT",
     "packageManager": "yarn@4.0.2",
     "dependencies": {
+        "cross-fetch": "^4.0.0",
         "lodash": "^4.17.21"
     },
     "devDependencies": {
