@@ -1,0 +1,5 @@
+export { Service, ServiceInput } from 'core/v1/service'
+export { ICustomEvent } from 'core/v1/types/i-custom-event'
+export { IEvent } from 'core/v1/types/i-event'
+export { IPageView } from 'core/v1/types/i-page-view'
+export { ISessionDuration } from 'core/v1/types/i-session-duration'
