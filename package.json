@@ -1,8 +1,31 @@
 {
-  "private": false,
-  "name": "tracepulse-client-sdk-core",
-  "description": "Open source client SDK for possible integration of TracePulse",
-  "version": "1.0.0",
-  "license": "MIT",
-  "packageManager": "yarn@4.0.2",
+    "name": "tracepulse-client-sdk-core",
+    "description": "Open source client SDK for possible integration of TracePulse",
+    "version": "1.0.0",
+    "license": "MIT",
+    "packageManager": "yarn@4.0.2",
+    "dependencies": {
+        "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+        "@types/eslint": "^8",
+        "@types/lodash": "^4.14.202",
+        "@typescript-eslint/eslint-plugin": "^6.13.1",
+        "@typescript-eslint/parser": "^6.13.1",
+        "eslint": "^8.55.0",
+        "husky": ">=6",
+        "lint-staged": ">=10",
+        "pinst": ">=2",
+        "prettier": "^3.1.0",
+        "typescript": "^5.3.2"
+    },
+    "lint-staged": {
+        "*.{ts,js,css,md,json,mjs}": "prettier --write",
+        "*.{ts,mjs,cjs}": "eslint --cache --fix"
+    },
+    "scripts": {
+        "postinstall": "husky install",
+        "prepublishOnly": "pinst --disable",
+        "postpublish": "pinst --enable"
+    }
 }

@@ -6,3 +6,5 @@
 !.yarn/sdks
 !.yarn/versions
 .idea
+.eslintcache
+node_modules
